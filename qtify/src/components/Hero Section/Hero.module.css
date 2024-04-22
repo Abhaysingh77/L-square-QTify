@@ -1,15 +1,10 @@
-.heroSection{
-    background-color: var(--black);
-    width: 100vw;
-    height: 40vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .hero{
+    background-color: var(--black);
+    margin: auto;
     display: flex;
     align-items: center;   
+    justify-content: center;
+
 }
 
 .heroText{
