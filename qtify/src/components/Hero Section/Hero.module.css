@@ -1,6 +1,5 @@
 .hero{
     background-color: var(--black);
-    margin: auto;
     display: flex;
     align-items: center;   
     justify-content: center;
@@ -14,6 +13,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .heroText > h2 {
     margin: 0;
 }
