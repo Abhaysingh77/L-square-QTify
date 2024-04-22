@@ -1,0 +1,24 @@
+.heroSection{
+    background-color: var(--black);
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero{
+    display: flex;
+    align-items: center;   
+}
+
+.heroText{
+    color: var(--white);
+    font-family: var(--primary-font);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.heroText > h2 {
+    margin: 0;
+}
