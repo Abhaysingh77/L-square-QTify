@@ -1,5 +1,5 @@
 .swiper {
-    padding: 0 0 0 4rem;
+    padding: 0 0 0 2.5rem;
 }
 .sectionHead {
     display: flex;
@@ -35,8 +35,8 @@
     z-index: 10;
 }
 .left {
-    left: 2.5rem;
+    left: 1.5rem;
 }
 .right {
-    right: 2.7rem;
+    right: 2rem;
 }
