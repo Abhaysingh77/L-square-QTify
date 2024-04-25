@@ -1,0 +1,15 @@
+.card {
+  background-color: var(--black);
+}
+
+.cardImg {
+  background-color: var(--white);
+  border-radius: .6rem;
+}
+
+.chip {
+  color: var(--white);
+  background-color: var(--black);
+  padding: 5px 5px;
+  margin: 5px;
+}

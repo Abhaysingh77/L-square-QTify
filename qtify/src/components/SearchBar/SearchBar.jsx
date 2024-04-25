@@ -11,11 +11,11 @@ export default function SearchBar() {
     <Paper
       className={Style.searchBox}
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 550 }}
     >
       <InputBase
         className={Style.input}
-        sx={{ ml: 2, flex: 1 }}
+        sx={{ ml: 2, flex: 1 , fontWeight:'bolder'}}
         placeholder="Search a album of your choice"
         inputProps={{
           "aria-label": "Search a album of your choice"

@@ -7,5 +7,6 @@
     font-size: 1rem;
     text-transform: none;
     cursor: pointer;
+    border: 2px solid black;
 }
 

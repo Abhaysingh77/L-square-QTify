@@ -1,0 +1,42 @@
+.swiper {
+    padding: 0 0 0 4rem;
+}
+.sectionHead {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+
+}
+
+.btn {
+    color:var(--primary);
+    cursor: pointer;
+}
+
+.albumName {
+    color: var(--white);
+
+}
+
+
+.left {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);   
+    cursor: pointer;
+    z-index: 10;
+}
+
+.right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+.left {
+    left: 2.5rem;
+}
+.right {
+    right: 2.7rem;
+}

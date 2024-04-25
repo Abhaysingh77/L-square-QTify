@@ -4,10 +4,10 @@ export default function Hero() {
   return (
     <div className={Style.hero}>
       <div className={Style.heroText}>
-        <h2>100 Thousand Songs, ad-free</h2>
-        <h2>Over thousand podcasts episodes</h2>
+        <h1>100 Thousand Songs, ad-free</h1>
+        <h1>Over thousand podcasts episodes</h1>
       </div>
-      <img src={headphone} alt="headphone" width="200" />
+      <img src={headphone} alt="headphone" width="220" />
     </div>
   );
 }
