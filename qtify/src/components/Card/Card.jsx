@@ -6,7 +6,7 @@ import { CardActionArea } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Style from "./Card.module.css";
 
-export default function MultiActionAreaCard({id, follows, image, title}) {
+export default function MultiActionCard({id, follows, image, title, type}) {
   return (
     <Card className={Style.card} sx={{ maxWidth: 159, maxHeight: 232 }} key={id}>
       <CardActionArea className={Style.cardImg}>
@@ -16,9 +16,13 @@ export default function MultiActionAreaCard({id, follows, image, title}) {
           image={image}
           alt={title}
         />
-        <Chip className={Style.chip}
-          label={`${follows} Follows`}
-        />
+        {
+          type ==='album' ? (<Chip className={Style.chip}
+            label={`${follows} Follows`}
+          />):(<Chip className={Style.chip}
+            label={`${follows} Likes`}
+          />)
+        }
       </CardActionArea>
       <Typography color="#FFFFFF">{title}</Typography>
     </Card>

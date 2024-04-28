@@ -3,109 +3,103 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Card from "../Card/Card";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, useMemo } from "react";
 
 import leftArr from "../../assets/LeftArrow.svg";
 import rightArr from "../../assets/RightArrow.svg";
 import Style from "./Section.module.css";
 import { Typography, Grid, Box } from "@mui/material";
+import Filter from '../Filter/filter';
 
-export default function Section({ topAlbumData, albumName }) {
+function CardsSwiper({ albumData, type }) {
   const swiperRef = useRef();
+
+  const renderSlides = useCallback(() => {
+    return albumData.map((item) => (
+      <SwiperSlide key={item.id}>
+        <Card
+          id={item.id}
+          follows={type === 'album' ? item.follows : item.likes}
+          image={item.image}
+          title={item.title}
+          type={type}
+        />
+      </SwiperSlide>
+    ));
+  }, [albumData, type]);
+
+  return (
+    <Swiper
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      className={Style.swiper}
+      breakpoints={{
+        640: { slidesPerView: 2 },
+        768: { slidesPerView: 4 },
+        1024: { slidesPerView: 6 },
+      }}
+      onSwiper={(swiper) => { swiperRef.current = swiper; }}
+    >
+      {renderSlides()}
+      <div className={Style.left} onClick={() => { swiperRef.current.slidePrev(); }}>
+        <img src={leftArr} alt="left" />
+      </div>
+      <div className={Style.right} onClick={() => { swiperRef.current.slideNext(); }}>
+        <img src={rightArr} alt="right" />
+      </div>
+    </Swiper>
+  );
+}
+
+export default function Section({ albumData, albumName, type, filters }) {
   const [showAll, setShowAll] = useState(false);
-  const handleClick = () => {
-    setShowAll(!showAll);
-  }
+  const [value, setValue] = useState("all");
+
+  const filteredData = useMemo(() => {
+    if (value === 'all') return albumData;
+    return albumData.filter((item) => item.genre.key === value);
+  }, [albumData, value]);
+
+  const handleClick = useCallback(() => {
+    setShowAll(prevShowAll => !prevShowAll);
+  }, []);
+
+  const handleChange = useCallback((event, newValue) => {
+    setValue(newValue);
+  }, []);
+
   return (
     <>
       <div className={Style.sectionHead}>
         <Typography className={Style.albumName} variant="h5">
           {albumName}
         </Typography>
-        {
-          showAll ? (<Typography className={Style.btn} variant="h6" onClick={handleClick}>
-          Collapse
-        </Typography> ) : (<Typography className={Style.btn} variant="h6" onClick={handleClick}>
-          Show All
-        </Typography>)
-        }
+        
+        <Typography className={Style.btn} variant="h6" onClick={handleClick}>
+          {showAll ? "Collapse" : "Show All"}
+        </Typography>
       </div>
-
-      {!showAll && (
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          className={Style.swiper}
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 6,
-              
-            },
-          }}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-        >
-          {topAlbumData.map((item) => {
-            return (
-              <SwiperSlide key={item.id}>
+      <div>
+        {type === 'song' && <Filter filters={filters} handleChange={handleChange} value={value}/>}
+      </div>
+      {showAll ? (
+        <Box paddingInlineStart='5%'>
+          <Grid container spacing={2}>
+            {filteredData.map((item) => (
+              <Grid key={item.id} mb={2} xs={6} sm={4} md={2}>
                 <Card
                   id={item.id}
-                  follows={item.follows}
+                  follows={type === 'album' ? item.follows : item.likes}
                   image={item.image}
                   title={item.title}
+                  type={type}
                 />
-              </SwiperSlide>
-            )
-          })}
-
-          <div
-            className={Style.left}
-            onClick={() => {
-              swiperRef.current.slidePrev();
-            }}
-          >
-            <img src={leftArr} alt="left" />
-          </div>
-          <div
-            className={Style.right}
-            onClick={() => {
-              swiperRef.current.slideNext();
-            }}
-          >
-            <img src={rightArr} alt="right" />
-          </div>
-        </Swiper>
-      )}
-      {
-        showAll && <Box ml={9} my={1}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            {topAlbumData.map((item) => {
-              return (
-                <Grid xs={2} key={item.id} mb={2}>
-                  <Card
-                    id={item.id}
-                    follows={item.follows}
-                    image={item.image}
-                    title={item.title}
-                  />
-                </Grid>
-              );
-            })}
+              </Grid>
+            ))}
           </Grid>
         </Box>
-      }
+      ) : (
+        <CardsSwiper albumData={filteredData} type={type} />
+      )}
     </>
   );
 }
