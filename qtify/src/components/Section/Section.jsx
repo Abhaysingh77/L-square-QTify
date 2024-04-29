@@ -8,24 +8,40 @@ import { useRef, useState, useCallback, useMemo } from "react";
 import leftArr from "../../assets/LeftArrow.svg";
 import rightArr from "../../assets/RightArrow.svg";
 import Style from "./Section.module.css";
-import { Typography, Grid, Box } from "@mui/material";
-import Filter from '../Filter/filter';
+import { Typography, Grid, Box, Tooltip } from "@mui/material";
+import Filter from "../Filter/filter";
 
 function CardsSwiper({ albumData, type }) {
   const swiperRef = useRef();
 
   const renderSlides = useCallback(() => {
-    return albumData.map((item) => (
-      <SwiperSlide key={item.id}>
-        <Card
-          id={item.id}
-          follows={type === 'album' ? item.follows : item.likes}
-          image={item.image}
-          title={item.title}
-          type={type}
-        />
-      </SwiperSlide>
-    ));
+    return type === "album"
+      ? albumData.map((item) => (
+          <SwiperSlide key={item.id}>
+            <Tooltip title={item.songs.length+" songs"} placement="top" arrow>
+              <div>
+                <Card
+                  id={item.id}
+                  follows={item.follows}
+                  image={item.image}
+                  title={item.title}
+                  type={type}
+                />
+              </div>
+            </Tooltip>
+          </SwiperSlide>
+        ))
+      : albumData.map((item) => (
+          <SwiperSlide key={item.id}>
+            <Card
+              id={item.id}
+              follows={item.likes}
+              image={item.image}
+              title={item.title}
+              type={type}
+            />
+          </SwiperSlide>
+        ));
   }, [albumData, type]);
 
   return (
@@ -37,13 +53,25 @@ function CardsSwiper({ albumData, type }) {
         768: { slidesPerView: 4 },
         1024: { slidesPerView: 6 },
       }}
-      onSwiper={(swiper) => { swiperRef.current = swiper; }}
+      onSwiper={(swiper) => {
+        swiperRef.current = swiper;
+      }}
     >
       {renderSlides()}
-      <div className={Style.left} onClick={() => { swiperRef.current.slidePrev(); }}>
+      <div
+        className={Style.left}
+        onClick={() => {
+          swiperRef.current.slidePrev();
+        }}
+      >
         <img src={leftArr} alt="left" />
       </div>
-      <div className={Style.right} onClick={() => { swiperRef.current.slideNext(); }}>
+      <div
+        className={Style.right}
+        onClick={() => {
+          swiperRef.current.slideNext();
+        }}
+      >
         <img src={rightArr} alt="right" />
       </div>
     </Swiper>
@@ -55,12 +83,12 @@ export default function Section({ albumData, albumName, type, filters }) {
   const [value, setValue] = useState("all");
 
   const filteredData = useMemo(() => {
-    if (value === 'all') return albumData;
+    if (value === "all") return albumData;
     return albumData.filter((item) => item.genre.key === value);
   }, [albumData, value]);
 
   const handleClick = useCallback(() => {
-    setShowAll(prevShowAll => !prevShowAll);
+    setShowAll((prevShowAll) => !prevShowAll);
   }, []);
 
   const handleChange = useCallback((event, newValue) => {
@@ -73,30 +101,52 @@ export default function Section({ albumData, albumName, type, filters }) {
         <Typography className={Style.albumName} variant="h5">
           {albumName}
         </Typography>
-        
+
         <Typography className={Style.btn} variant="h6" onClick={handleClick}>
           {showAll ? "Collapse" : "Show All"}
         </Typography>
       </div>
       <div>
-        {type === 'song' && <Filter filters={filters} handleChange={handleChange} value={value}/>}
+        {type === "song" && (
+          <Filter filters={filters} handleChange={handleChange} value={value} />
+        )}
       </div>
       {showAll ? (
-        <Box paddingInlineStart='5%'>
-          <Grid container spacing={2}>
-            {filteredData.map((item) => (
-              <Grid key={item.id} mb={2} xs={6} sm={4} md={2}>
-                <Card
-                  id={item.id}
-                  follows={type === 'album' ? item.follows : item.likes}
-                  image={item.image}
-                  title={item.title}
-                  type={type}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+        type === "album" ? (
+          <Box paddingInlineStart="5%">
+            <Grid container spacing={2}>
+              {filteredData.map((item) => (
+                <Tooltip title={item.songs.length+" songs"} placement="top" arrow key={item.id}>
+                  <Grid mb={2} xs={6} sm={4} md={2}>
+                    <Card
+                      id={item.id}
+                      follows={item.follows}
+                      image={item.image}
+                      title={item.title}
+                      type={type}
+                    />
+                  </Grid>
+                </Tooltip>
+              ))}
+            </Grid>
+          </Box>
+        ) : (
+          <Box paddingInlineStart="5%">
+            <Grid container spacing={2}>
+              {filteredData.map((item) => (
+                <Grid key={item.id} mb={2} xs={6} sm={4} md={2}>
+                  <Card
+                    id={item.id}
+                    follows={item.likes}
+                    image={item.image}
+                    title={item.title}
+                    type={type}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )
       ) : (
         <CardsSwiper albumData={filteredData} type={type} />
       )}
