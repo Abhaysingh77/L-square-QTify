@@ -50,7 +50,7 @@ function CardsSwiper({ albumData, type }) {
       className={Style.swiper}
       breakpoints={{
         300: { slidesPerView: 2 },
-        401: { slidesPerView: 3 },
+        550: { slidesPerView: 3 },
         700: { slidesPerView: 4 },
         768: { slidesPerView: 5 },
         1024: { slidesPerView: 6 },
