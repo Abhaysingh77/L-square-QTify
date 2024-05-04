@@ -49,8 +49,15 @@ function CardsSwiper({ albumData, type }) {
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       className={Style.swiper}
       breakpoints={{
-        640: { slidesPerView: 2 },
-        768: { slidesPerView: 4 },
+        300: {slidesPerView: 2,
+          spacing: 3
+         },
+        400: {slidesPerView: 2,
+          spacing: 3
+         },
+        640: { slidesPerView: 3 },
+        700: { slidesPerView: 4 },
+        768: { slidesPerView: 5 },
         1024: { slidesPerView: 6 },
       }}
       onSwiper={(swiper) => {

@@ -11,7 +11,7 @@ export default function SearchBar() {
     <Paper
       className={Style.searchBox}
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 550 }}
+      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: '50vw' }}
     >
       <InputBase
         className={Style.input}

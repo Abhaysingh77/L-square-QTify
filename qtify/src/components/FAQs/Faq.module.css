@@ -1,0 +1,30 @@
+* {
+    font-family: var(--primary);
+}
+.faqTitle {
+    color: var(--white);
+    text-align: center;
+
+}
+
+.faqContainer {
+    width: 80vw;
+    margin: auto;
+    height: max-content;
+
+}
+
+.accordion1 {
+    background-color: var(--black);
+    border: 1px solid var(--white);
+    border-radius: 10px 10px 5px 5px;
+    color: var(--white);
+    margin-top: 1rem;
+}
+.accordion2 {
+    background-color: var(--black);
+    border: 1px solid var(--white);
+    border-radius: 5px 5px 10px 10px;
+    color: var(--white);
+    margin-top: 1rem;
+}

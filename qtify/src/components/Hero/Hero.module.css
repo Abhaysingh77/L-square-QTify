@@ -4,7 +4,6 @@
     align-items: center;   
     justify-content: center;
     padding: 1rem;
-
 }
 
 .heroText{
@@ -17,4 +16,15 @@
 
 .heroText > h1 {
     margin: 0;
+}
+
+@media screen and (max-width:850px) {
+    .hero{
+        background-color: var(--black);
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;   
+        justify-content: center;
+        padding: 1rem;
+    }
 }

@@ -3,6 +3,8 @@ import Hero from '../../components/Hero/Hero';
 import Section from '../../components/Section/Section';
 import { useOutletContext } from 'react-router-dom';
 import { Divider } from '@mui/material';
+import Faq from '../../components/FAQs/Faq';
+import AudioPlayer from '../../components/Audio/Audio';
 
 export default function Homepage () {
     const { data } = useOutletContext();
@@ -15,6 +17,8 @@ export default function Homepage () {
             <Divider sx={{borderColor:'#34C94B', marginTop:'4vw'}}/>
             <Section albumData={songData} albumName="Songs" type="song" filters={filters}/>
             <Divider sx={{borderColor:'#34C94B', marginTop:'4vw', marginBottom:'4vw'}}/>
+            <Faq />
+            <AudioPlayer />
         </>
     )
 }

@@ -1,0 +1,36 @@
+.buttons{
+  color: var(--white);
+  font-family: var(--primary-font);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid white;
+  position: relative;
+  bottom: 0;
+  height: max-content;
+  margin-top: 2rem;
+  padding: 2%;
+}
+
+.desc {
+  display: flex;
+  align-items: center;
+}
+.controls {
+  margin: auto;
+  text-align: center;
+}
+.names {
+  color: var(--white);
+  font-family: var(--primary-font);
+  padding: 5px;
+}
+
+.progressBar {
+    display: flex;
+    align-items: center;
+}
+  
