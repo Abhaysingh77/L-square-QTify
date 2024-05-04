@@ -18,8 +18,8 @@ function CardsSwiper({ albumData, type }) {
     return type === "album"
       ? albumData.map((item) => (
           <SwiperSlide key={item.id}>
-            <Tooltip title={item.songs.length+" songs"} placement="top" arrow>
-              <div>
+            <Tooltip title={item.songs.length + " songs"} placement="top" arrow>
+              <Box>
                 <Card
                   id={item.id}
                   follows={item.follows}
@@ -27,7 +27,7 @@ function CardsSwiper({ albumData, type }) {
                   title={item.title}
                   type={type}
                 />
-              </div>
+              </Box>
             </Tooltip>
           </SwiperSlide>
         ))
@@ -49,13 +49,8 @@ function CardsSwiper({ albumData, type }) {
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       className={Style.swiper}
       breakpoints={{
-        300: {slidesPerView: 2,
-          spacing: 3
-         },
-        400: {slidesPerView: 2,
-          spacing: 3
-         },
-        640: { slidesPerView: 3 },
+        300: { slidesPerView: 2 },
+        401: { slidesPerView: 3 },
         700: { slidesPerView: 4 },
         768: { slidesPerView: 5 },
         1024: { slidesPerView: 6 },
@@ -120,10 +115,15 @@ export default function Section({ albumData, albumName, type, filters }) {
       </div>
       {showAll ? (
         type === "album" ? (
-          <Box paddingInlineStart="5%">
-            <Grid container spacing={2}>
+          <Box padding="2vw" width="92vw" margin="auto">
+            <Grid container spacing={2} sx={{margin:'auto'}}>
               {filteredData.map((item) => (
-                <Tooltip title={item.songs.length+" songs"} placement="top" arrow key={item.id}>
+                <Tooltip
+                  title={item.songs.length + " songs"}
+                  placement="top"
+                  arrow
+                  key={item.id}
+                >
                   <Grid mb={2} xs={6} sm={4} md={2}>
                     <Card
                       id={item.id}
@@ -138,8 +138,8 @@ export default function Section({ albumData, albumName, type, filters }) {
             </Grid>
           </Box>
         ) : (
-          <Box paddingInlineStart="5%">
-            <Grid container spacing={2}>
+          <Box padding="2vw" width="92vw" margin="auto">
+            <Grid container spacing={2} sx={{margin:'auto'}}>
               {filteredData.map((item) => (
                 <Grid key={item.id} mb={2} xs={6} sm={4} md={2}>
                   <Card

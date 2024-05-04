@@ -11,7 +11,7 @@ export default function SearchBar() {
     <Paper
       className={Style.searchBox}
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: '50vw' }}
+      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: '50vw', height:'6.5vh' }}
     >
       <InputBase
         className={Style.input}
@@ -21,7 +21,7 @@ export default function SearchBar() {
           "aria-label": "Search a album of your choice"
         }}
       />
-      <Divider sx={{ border: "1px solid" }} orientation="vertical" flexItem />
+      {/* <Divider sx={{ border: "1px solid white" }} orientation="vertical" flexItem /> */}
       <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>

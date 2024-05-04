@@ -8,7 +8,7 @@ import Style from "./Card.module.css";
 
 export default function MultiActionCard({id, follows, image, title, type}) {
   return (
-    <Card className={Style.card} sx={{ maxWidth: 159, maxHeight: 232 }} key={id}>
+    <Card className={Style.card} sx={{ width: 159, height: 232 }} key={id}>
       <CardActionArea className={Style.cardImg}>
         <CardMedia
           component="img"

@@ -1,6 +1,11 @@
+import Style from "./Button.module.css";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+import { IconButton } from "@mui/material";
 
-import Style from './Button.module.css'
-
-export default function ButtonComponent({children}) {
-  return <button className={Style.button}>{children}</button>;
+export default function ButtonComponent({ children }) {
+  return (
+    <IconButton >
+      <FeedbackIcon sx={{color:"#FFFFFF", fontSize:"2rem" }}/>
+    </IconButton>
+  );
 }

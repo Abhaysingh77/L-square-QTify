@@ -1,5 +1,7 @@
 .swiper {
-   padding-inline-start: 3%;
+   width: 92vw;
+   margin: auto;
+   padding: 2vw;
 }
 .sectionHead {
     display: flex;

@@ -8,6 +8,7 @@ import Style from "./Faq.module.css";
 
 export default function Faq() {
   return (
+    <>
     <div className={Style.faqContainer}>
       <div>
         <h1 className={Style.faqTitle}>FAQs</h1>
@@ -45,5 +46,7 @@ export default function Faq() {
         </Accordion>
       </div>
     </div>
+    <hr className={Style.divider}/>
+    </>
   );
 }
